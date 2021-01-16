@@ -1,8 +1,11 @@
-package jan08;
+package homework1;
 
+import java.util.Arrays;
 import java.util.Objects;
 
-public class Store {
+public class Store implements Comparable<Store>{
+
+    private final Integer sizeOfBigStore = 10;
     private String name;
     private Integer countOfDepartments;
     private Boolean isOpen;
@@ -23,20 +26,55 @@ public class Store {
         this.countOfDepartments = 25;
         this.isOpen = true;
     }
+
     public Integer increseCountOfDepartments(Integer addDepartments){
         Integer newCountOfDepartments = countOfDepartments + addDepartments;
         countOfDepartments = newCountOfDepartments;
         return newCountOfDepartments;
     }
+
+    public String isStoreOpen() {
+       return isOpen ? "Store is open" : "Store is close";
+    }
+
+    public String defineStoreSize() {
+        switch (countOfDepartments){
+            case 1: return "countOfDepartments = 1";
+            case 2: return "countOfDepartments = 2";
+            default: return "anotherCountOfDepartments";
+        }
+    }
+
     public String storeInfo(){
-        if (isOpen && countOfDepartments>=10){
+        if (isOpen && countOfDepartments>= sizeOfBigStore){
             return "Store open and big";
-        } else if (!isOpen && countOfDepartments>=10){
+        } else if (!isOpen && countOfDepartments>= sizeOfBigStore){
             return "Store is close and big";
-        } else if (isOpen && countOfDepartments<10){
+        } else if (isOpen && countOfDepartments< sizeOfBigStore){
             return "Store is open and small";
         } else {
             return "Store is close and small";
+        }
+    }
+
+    public void makeStoreBig() {
+        if (countOfDepartments < sizeOfBigStore) {
+            while (!countOfDepartments.equals(sizeOfBigStore)) {
+                countOfDepartments ++;
+            }
+        }
+    }
+
+    public static void printArrayStoreInfo (Store[] stores) {
+        for (int i = 0; i<stores.length; i++) {
+            System.out.println(stores[i]);
+        }
+    }
+
+    public static void printSortedArraySortInfo (Store [] stores) {
+        Arrays.sort(stores);
+        for (Store store : stores) {
+            System.out.println(store);
         }
     }
 
@@ -85,5 +123,10 @@ public class Store {
                 ", countOfDepartments=" + countOfDepartments +
                 ", isOpen=" + isOpen +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Store o) {
+        return Integer.compare(getCountOfDepartments(), o.getCountOfDepartments());
     }
 }
