@@ -7,6 +7,7 @@ public class Truck extends Car {
     public Truck(String name, String color, Boolean isRunning, CarBrand carBrand, Boolean isEmpty) {
         super(name, color, isRunning, carBrand);
         this.isEmpty = isEmpty;
+
     }
 
     @Override
